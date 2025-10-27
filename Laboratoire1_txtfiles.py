@@ -1,8 +1,6 @@
 # Code pour afficher les spectres de l'OSA du labo 1
 
-import numpy as np
 import matplotlib.pyplot as plt
-import os
 
 
 """ 
@@ -63,7 +61,7 @@ def data_text_en_array(string_path: str, lignes_a_skip: int) -> list:
 
 # Premier test de fichier :
 for i in range(7):
-    file_number = 542
+    file_number = 538 + i
     wavelength, power_dbm = data_text_en_array(f"SLED/20 deg/1350-1650_Real Time_1_{file_number}.txt", 102)
     #print(wavelength, power_dbm)
 
