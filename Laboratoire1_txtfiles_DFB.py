@@ -63,23 +63,68 @@ def data_text_en_array(string_path: str, lignes_a_skip: int) -> list:
 
     return wvl, dbm
 
-"""
-# Affichage des courbes superposées 
-wavelength_total = data_text_en_array(f"SLED/20 deg/1350-1650_Real Time_1_539.txt", 102)
-labels = ["20 mA", "40 mA", "60 mA", "80 mA", "100 mA", "120 mA", "130 mA"]
-for i in range(7):
-    file_number = 539+i
-    wavelength, power_dbm = data_text_en_array(f"SLED/20 deg/1350-1650_Real Time_1_{file_number}.txt", 102)
-    #print(wavelength, power_dbm)
-    plt.plot(wavelength_total[0], power_dbm, label = labels[i])
+
+
+def convert_dbm_to_mw(dbm_array: list) -> list:
+    mw_array = [10**(dbm/10) for dbm in dbm_array]
+    return mw_array
+    
+# Affichage des courbes superposées DFB, puissance dBm
+wavelength_total_600 = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_600.txt", 104)
+wavelength_total_601 = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_601.txt", 102)
+wavelength_total_602 = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_602.txt", 106)
+labels = ["0 mA", "5 mA", "10 mA", "15 mA", "20 mA", "25 mA", "30 mA", "40 mA"]
+for i in range(8):
+    file_number = 600+i
+    if file_number == 600:
+        wavelength, power_dbm = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_{file_number}.txt", 104)
+        #print(wavelength, power_dbm)
+        plt.plot(wavelength_total_600[0], power_dbm, label = labels[i])
+    elif file_number == 601:
+        wavelength, power_dbm = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_{file_number}.txt", 102)
+        #print(wavelength, power_dbm)
+        plt.plot(wavelength_total_601[0], power_dbm, label = labels[i])
+    else:
+        wavelength, power_dbm = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_{file_number}.txt", 106)
+        #print(wavelength, power_dbm)
+        plt.plot(wavelength_total_602[0], power_dbm, label = labels[i])
 
 plt.xlabel("Wavelength (nm)")
 plt.ylabel("Power (dBm)")
 plt.legend()
-plt.xlim(1470, 1620)
-plt.savefig(os.path.join(figures_dir, "spectre_sled_tout_courant.png"), dpi=300, bbox_inches='tight')
+plt.xlim(1541, 1560)
+plt.savefig(os.path.join(figures_dir, "spectre_dfb_tout_courant_dBm.png"), dpi=300, bbox_inches='tight')
 plt.show()
-"""
+
+
+# Affichage des courbes superposées DFB, puissance mW
+wavelength_total_600 = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_600.txt", 104)
+wavelength_total_601 = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_601.txt", 102)
+wavelength_total_602 = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_602.txt", 106)
+labels = ["0 mA", "5 mA", "10 mA", "15 mA", "20 mA", "25 mA", "30 mA", "40 mA"]
+for i in range(8):
+    file_number = 600+i
+    if file_number == 600:
+        wavelength, power_dbm = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_{file_number}.txt", 104)
+        #print(wavelength, power_dbm)
+        plt.plot(wavelength_total_600[0], convert_dbm_to_mw(power_dbm), label = labels[i])
+    elif file_number == 601:
+        wavelength, power_dbm = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_{file_number}.txt", 102)
+        #print(wavelength, power_dbm)
+        plt.plot(wavelength_total_601[0], convert_dbm_to_mw(power_dbm), label = labels[i])
+    else:
+        wavelength, power_dbm = data_text_en_array(f"DFB/20 deg/1541-1560_Real Time_1_{file_number}.txt", 106)
+        #print(wavelength, power_dbm)
+        plt.plot(wavelength_total_602[0], convert_dbm_to_mw(power_dbm), label = labels[i])
+
+plt.xlabel("Wavelength (nm)")
+plt.ylabel("Power (mW)")
+plt.legend()
+plt.xlim(1541, 1560)
+plt.savefig(os.path.join(figures_dir, "spectre_dfb_tout_courant_mW.png"), dpi=300, bbox_inches='tight')
+plt.show()
+
+
 
 """
 # Affichage des spectres pour chaque courant 
@@ -112,7 +157,7 @@ plt.savefig(os.path.join(figures_dir, "spectre_ripple_at_130mA.png"), dpi=300, b
 plt.show()
 """
 
-
+'''
 # Affichage des courbes superposées 
 wavelength_total = data_text_en_array(f"SLED/20 deg/1350-1650_Real Time_1_539.txt", 102)
 labels = ["20 mA", "40 mA", "60 mA", "80 mA", "100 mA", "120 mA", "130 mA"]
@@ -129,3 +174,4 @@ plt.ylim(-41, -29.75)
 plt.xlim(1518.4, 1531.4)
 plt.savefig(os.path.join(figures_dir, "spectre_sled_tout_courant_ripple.png"), dpi=300, bbox_inches='tight')
 plt.show()
+'''
