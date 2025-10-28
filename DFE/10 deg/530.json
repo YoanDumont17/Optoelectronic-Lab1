@@ -1,0 +1,10 @@
+{
+    "Spectral range start": "1541,000 nm",
+    "Spectral range end": "1560,000 nm",
+    "RBW value":  	"0,041 nm",
+    "Average signal power":  	"1,07 dBm",
+    "Signal power flatness":  	"41,30 dB",
+    "Average OSNR":  	"38,76 dB",
+    "OSNR flatness":  	"35,85 dB",
+    "Total power in scan range":  	"4,08 dBm"
+}

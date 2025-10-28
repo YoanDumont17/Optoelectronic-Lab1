@@ -1,0 +1,57 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+import matplotlib.pyplot as plt
+
+def afficher_graph(fichier):
+    with open(fichier, 'r') as f:
+        lignes = f.readlines()
+    
+    # Trouver la section Graph
+    debut = -1
+    for i, ligne in enumerate(lignes):
+        if "Graph" in ligne:
+            debut = i + 4
+            break
+
+    # Extraire les données
+    x = []
+    y = []
+    if debut > 0:
+        for ligne in lignes[debut:]:
+            ligne = ligne.strip()
+            ligne = ligne.replace(',', '.')
+            valeurs = ligne.split()
+            if len(valeurs) >= 2:
+                x.append(float(valeurs[0]))
+                y.append(float(valeurs[1]))
+               
+    
+    else:
+            print("Error")
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(x, y, color='black')
+    plt.xlabel("Longueur d'onde (nm)")
+    plt.ylabel("Puissance de sortie [dBm]")
+    plt.annotate(f'Puissance max: {np.max(y):.2f} dBm\nLongueur d\'onde centrale: {x[np.argmax(y)]:.2f} $\pm$ 0.02 [nm]', 
+                 xy=(x[np.argmax(y)], np.max(y)), 
+                 xytext=(x[np.argmax(y)]+1, np.max(y)-10),
+                 arrowprops=dict(facecolor='red', shrink=0.05),
+                 fontsize=10,
+                 color='red')
+    plt.xlim(min(x), max(x))
+    plt.ylim(min(y), max(y)+5)
+    plt.show()
+
+    return np.array(x), np.array(y)
+
+
+index = [530, 609, 610, 611, 612, 613, 614, 615, 616]
+
+for i in index:
+    x, y = afficher_graph(f"DFE\\10 deg\\1541-1560_Real Time_1_{i}.txt")
+    print(f"Max Power: {np.max(y)} dBm, Wavelength at Max Power: {x[np.argmax(y)]} nm")
+    print(f"Band gap = {1240/x[np.argmax(y)]:.5f} eV")
+
