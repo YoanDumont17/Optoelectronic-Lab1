@@ -151,8 +151,8 @@ def sled_20deg_courant_in_puissance_db() -> None:
 
 def plot_courbes_vi_sled() -> None:
     plt.figure(figsize=(8, 5), dpi=150)
-    plt.plot(data_sled_20deg["courant_in"], data_sled_20deg["tension"], label="SLED à 20 degrés C")
-    plt.plot(data_sled_10deg["courant_in"], data_sled_10deg["tension"], label="SLED à 10 degrés C")
+    plt.plot(data_sled_20deg["courant_in"], data_sled_20deg["tension"], 'k:', label="SLED à 20 degrés C")
+    plt.plot(data_sled_10deg["courant_in"], data_sled_10deg["tension"], 'k', label="SLED à 10 degrés C")
     plt.xlabel("Courant (mA)")
     plt.ylabel("Tension (V)")
     plt.legend()
@@ -162,8 +162,8 @@ def plot_courbes_vi_sled() -> None:
 
 def plot_courbes_vi_dfb() -> None:
     plt.figure(figsize=(8, 5), dpi=150)
-    plt.plot(data_dfb_20deg["courant_in"], data_dfb_20deg["tension"], label="DFB à 20 degrés C")
-    plt.plot(data_dfb_10deg["courant_in"], data_dfb_10deg["tension"], label="DFB à 10 degrés C")
+    plt.plot(data_dfb_20deg["courant_in"], data_dfb_20deg["tension"], 'k:', label="DFB à 20 degrés C")
+    plt.plot(data_dfb_10deg["courant_in"], data_dfb_10deg["tension"], 'k', label="DFB à 10 degrés C")
     plt.xlabel("Courant (mA)")
     plt.ylabel("Tension (V)")
     plt.legend()
@@ -173,8 +173,8 @@ def plot_courbes_vi_dfb() -> None:
 
 def plot_courbes_pi_sled() -> None:
     plt.figure(figsize=(8, 5), dpi=150)
-    plt.plot(data_sled_20deg["courant_in"][0:-1], data_sled_20deg["puissance_w"]*1e3, label="SLED à 20 degrés C")
-    plt.plot(data_sled_10deg["courant_in"][0:-1], data_sled_10deg["puissance_w"]*1e3, label="SLED à 10 degrés C")
+    plt.plot(data_sled_20deg["courant_in"][0:-1], data_sled_20deg["puissance_w"]*1e3, 'k:',label="SLED à 20 degrés C")
+    plt.plot(data_sled_10deg["courant_in"][0:-1], data_sled_10deg["puissance_w"]*1e3, 'k',label="SLED à 10 degrés C")
     plt.xlabel("Courant (mA)")
     plt.ylabel("Puissance (mW)")
     plt.legend()
@@ -184,8 +184,8 @@ def plot_courbes_pi_sled() -> None:
 
 def plot_courbes_pi_dfb() -> None:
     plt.figure(figsize=(8, 5), dpi=150)
-    plt.plot(data_dfb_20deg["courant_in"], data_dfb_20deg["puissance_w"]*1e3, label="DFB à 20 degrés C")
-    plt.plot(data_dfb_10deg["courant_in"], data_dfb_10deg["puissance_w"]*1e3, label="DFB à 10 degrés C")
+    plt.plot(data_dfb_20deg["courant_in"], data_dfb_20deg["puissance_w"]*1e3, 'k:', label="DFB à 20 degrés C")
+    plt.plot(data_dfb_10deg["courant_in"], data_dfb_10deg["puissance_w"]*1e3, 'k', label="DFB à 10 degrés C")
     plt.xlabel("Courant (mA)")
     plt.ylabel("Puissance (mW)")
     plt.legend()
